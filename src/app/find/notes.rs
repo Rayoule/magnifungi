@@ -1,6 +1,6 @@
 use leptos::prelude::*;
+use magnifungi_shared_types::entry_types::{entry_list::EntryList, entry_note::EntryNote};
 
-use super::entry_types::{entry_list::EntryList, entry_note::EntryNote, EntryName, FreeText};
 
 
 

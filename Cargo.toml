@@ -14,6 +14,9 @@ serde-wasm-bindgen = "0.6"
 console_error_panic_hook = "0.1.7"
 strum = "0.27"
 strum_macros = "0.27"
+magnifungi_shared_types = { path = "./magnifungi_shared_types" }
+magnifungi_macros = { path = "./magnifungi_macros" }
+
 
 [workspace]
-members = ["src-tauri"]
+members = ["magnifungi_macros", "magnifungi_shared_types", "magnifungi_tests", "src-tauri"]

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
+use magnifungi_shared_types::entry_types::{entry_value_unit::EntryValueUnit, FreeText};
 
-use super::entry_types::{entry_enum::{entry_enum_list::{/*AttachmentEnum, CapShapeEnum, CapSurfaceEnum, DispersionEnum, HollowSolidEnum, PrintMethodEnum, RingEnum, SpacingEnum, StemSurfaceEnum*/}, EntryEnumCustomNote}, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, FreeText};
 
 
 /// Description of the specimen's morphology

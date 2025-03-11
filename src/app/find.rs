@@ -1,7 +1,7 @@
-use entry_types::entry_trait::Entry;
 use leptos::prelude::*;
 
 use infos::FindInfos;
+use magnifungi_shared_types::entry_types::entry_trait::Entry;
 use morphology::Morphology;
 use chemical_attributes::ChemicalAttributes;
 use notes::Notes;
@@ -14,7 +14,6 @@ pub mod morphology;
 pub mod chemical_attributes;
 pub mod photos;
 pub mod notes;
-pub mod entry_types;
 
 
 #[derive(Default, Clone)]

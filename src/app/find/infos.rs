@@ -1,8 +1,7 @@
 use leptos::prelude::*;
-
-use super::entry_types::{DateTime, FreeText, Location, EntryName};
-
-
+use magnifungi_shared_types::entry_types::{
+    DateTime, EntryName, FreeText, Location
+};
 
 
 #[derive(Default, Clone)]

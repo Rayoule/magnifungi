@@ -1,6 +1,5 @@
-use leptos::prelude::*;
+use serde::{Deserialize, Serialize};
 use strum::IntoEnumIterator;
-use strum_macros::{EnumIter, EnumString, Display};
 
 use super::{entry_trait::Entry, FreeText};
 
@@ -87,7 +86,6 @@ impl<T: IntoEntryEnumerator> HasEntryEnumerator<T> for EntryEnum<T> {
 }
 
 
-
 /// Describes an enum for a Find entry field
 pub trait HasEntryEnumerator<T: IntoEntryEnumerator> {
 
@@ -135,3 +133,11 @@ pub trait IntoEntryEnumerator: IntoEnumIterator {
     fn to_str(&self) -> &str;
     fn is_custom(&self) -> bool { false }
 }
+
+/// Struct for Json Enums
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct JsonEnum {
+    pub name: String,
+    pub variants: Vec<String>,
+}
+

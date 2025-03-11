@@ -1,0 +1,15 @@
+[package]
+name = "magnifungi_macros"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0", features = ["full"] }
+quote = "1.0"
+proc-macro2 = "1.0"
+serde_json = "1.0"
+serde = { version = "1", features = ["derive"] }
+magnifungi_shared_types = { path = "../magnifungi_shared_types" }

@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
+use magnifungi_shared_types::entry_types::entry_trait::Entry;
 use super::find::Find;
-use crate::app::find::entry_types::entry_trait::Entry;
 
 
 

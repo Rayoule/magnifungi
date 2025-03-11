@@ -8,19 +8,23 @@
 pub enum CapShapeEnum {
     #[default]
     Convex,
-    NotEdible,
+    Flat,
     Poisonous,
     Medicinal,
     Unknown,
 }
-(ex: convex, flat, umbonate, bell-shaped, custom, etc.) 
 impl IntoEntryEnumerator for CapShapeEnum {
     fn to_str(&self) -> &str {
         match self {
-
+            CapShapeEnum::Convex => todo!(),
+            CapShapeEnum::Flat => todo!(),
+            CapShapeEnum::Poisonous => todo!(),
+            CapShapeEnum::Medicinal => todo!(),
+            CapShapeEnum::Unknown => todo!(),
         }
     }
 }
+
 
 /// Cap Surface Enum
 #[derive(EnumIter, Debug, PartialEq, Default, Clone)]

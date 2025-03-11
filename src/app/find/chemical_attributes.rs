@@ -1,4 +1,10 @@
-use super::entry_types::{entry_enum::{entry_enum_list::{/*ChemicalReactionEnum, EdibleEnum, OdorEnum, TasteEnum*/}, EntryEnumCustomNote, EntryEnumNote}, entry_list::EntryList, entry_tint::EntryTint, FreeText};
+use magnifungi_shared_types::entry_types::{
+    entry_enum::{
+        EntryEnumCustomNote, EntryEnumNote
+    },
+    entry_list::EntryList, entry_tint::EntryTint, FreeText};
+
+
 
 
 #[derive(Default, Clone)]
