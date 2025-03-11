@@ -1,12 +1,9 @@
-use leptos::prelude::*;
-use strum_macros::EnumIter;
-
-use super::entry_types::{entry_enum::{EntryEnumCustomNote, EntryEnumNote, IntoEntryEnumerator}, entry_list::EntryList, entry_tint::EntryTint, FreeText};
-use strum::IntoEnumIterator;
+use super::entry_types::{entry_enum::{entry_enum_list::{/*ChemicalReactionEnum, EdibleEnum, OdorEnum, TasteEnum*/}, EntryEnumCustomNote, EntryEnumNote}, entry_list::EntryList, entry_tint::EntryTint, FreeText};
 
 
 #[derive(Default, Clone)]
 pub struct ChemicalAttributes {
+    /*
     /// How much is this specimen edible ?
     /// (edible, not edible, poisonous, medicinal, unknown)
     pub edible: EntryEnumNote<EdibleEnum>,
@@ -22,97 +19,9 @@ pub struct ChemicalAttributes {
     pub bruising_reaction: Option<BruisingReaction>,
     /// Are there chemical reactions that have been tested on the specimen ?
     pub chemical_reactions: EntryList<EntryEnumCustomNote<ChemicalReactionEnum>>,
+    */
 }
 
-
-#[derive(EnumIter, Debug, PartialEq, Default, Clone)]
-pub enum EdibleEnum {
-    #[default]
-    Edible,
-    NotEdible,
-    Poisonous,
-    Medicinal,
-    Unknown,
-}
-impl IntoEntryEnumerator for EdibleEnum {
-    fn to_str(&self) -> &str {
-        match self {
-            EdibleEnum::Edible      => "Edible",
-            EdibleEnum::NotEdible   => "Not Edible",
-            EdibleEnum::Poisonous   => "Poisonous",
-            EdibleEnum::Medicinal   => "Medicinal",
-            EdibleEnum::Unknown     => "Unknown",
-        }
-    }
-}
-
-#[derive(EnumIter, Debug, PartialEq, Default, Clone)]
-pub enum OdorEnum {
-    #[default]
-    Mild,
-    Fruity,
-    AniseLike,
-    Pungent,
-    Custom,
-}
-impl IntoEntryEnumerator for OdorEnum {
-    fn to_str(&self) -> &str {
-        match self {
-            OdorEnum::Mild      => "Mild",
-            OdorEnum::Fruity    => "Fruity",
-            OdorEnum::AniseLike => "AniseLike",
-            OdorEnum::Pungent   => "Pungent",
-            OdorEnum::Custom    => "",
-        }
-    }
-    fn is_custom(&self) -> bool {
-        *self == OdorEnum::Custom
-    }
-}
-
-#[derive(EnumIter, Debug, PartialEq, Default, Clone)]
-pub enum TasteEnum {
-    #[default]
-    Mild,
-    Bitter,
-    Acrid,
-    Custom,
-}
-impl IntoEntryEnumerator for TasteEnum {
-    fn to_str(&self) -> &str {
-        match self {
-            TasteEnum::Mild     => "Mild",
-            TasteEnum::Bitter   => "Bitter",
-            TasteEnum::Acrid    => "Acrid",
-            TasteEnum::Custom   => "",
-        }
-    }
-    fn is_custom(&self) -> bool {
-        *self == TasteEnum::Custom
-    }
-}
-
-#[derive(EnumIter, Debug, PartialEq, Default, Clone)]
-pub enum ChemicalReactionEnum {
-    #[default]
-    KOH,
-    Ammonia,
-    FeSO4,
-    Custom,
-}
-impl IntoEntryEnumerator for ChemicalReactionEnum {
-    fn to_str(&self) -> &str {
-        match self {
-            ChemicalReactionEnum::KOH       => "KOH",
-            ChemicalReactionEnum::Ammonia   => "Ammonia",
-            ChemicalReactionEnum::FeSO4     => "FeSO4",
-            ChemicalReactionEnum::Custom    => "",
-        }
-    }
-    fn is_custom(&self) -> bool {
-        *self == ChemicalReactionEnum::Custom
-    }
-}
 
 
 #[derive(Clone)]
