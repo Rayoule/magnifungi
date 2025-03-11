@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use super::Entry;
 
 
+#[derive(Default, Clone)]
 pub struct EntryList<T: Entry> {
     pub entries: Vec<T>,
 }

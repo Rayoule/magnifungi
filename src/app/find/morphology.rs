@@ -1,9 +1,10 @@
 use leptos::prelude::*;
 
-use super::entry_types::{entry_enum::EntryEnumCustomNote, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, FreeText};
+use super::entry_types::{entry_tint::EntryTint, entry_value_unit::EntryValueUnit, FreeText};
 
 
 /// Description of the specimen's morphology
+#[derive(Default, Clone)]
 pub struct Morphology {
     /// Specimen Cap (Pileus)
     pub cap: Option<Cap>,
@@ -21,6 +22,7 @@ pub struct Morphology {
 
 
 /// Describes the specimen's Cap (Pileus)
+#[derive(Clone)]
 pub struct Cap {
     /// (convex, flat, umbonate, bell-shaped, custom, etc.)
     pub shape: EntryEnumCustomNote,
@@ -30,6 +32,9 @@ pub struct Cap {
     pub dimension: Dimensions,
 }
 
+
+/// Describes dimensions of a specimen part
+#[derive(Clone)]
 pub struct Dimensions {
     pub diameter: Option<EntryValueUnit>,
     pub height: Option<EntryValueUnit>,
@@ -38,6 +43,8 @@ pub struct Dimensions {
 }
 
 
+/// Describes the specimen's Spore Dispersion
+#[derive(Clone)]
 pub struct SporeDispersion {
     /// (gilled, pored, toothed, ridged, custom, none)
     pub disp_type: EntryEnumCustomNote,
@@ -48,7 +55,9 @@ pub struct SporeDispersion {
     pub tint: EntryTint
 }
 
+
 /// Describes the specimen's stem (stipe)
+#[derive(Clone)]
 pub struct Stem {
     pub dimensions: Dimensions,
     /// (smooth, fibrous, scaly, reticulated, custom, etc.)
@@ -58,15 +67,21 @@ pub struct Stem {
     pub tint: EntryTint,
 }
 
+
+#[derive(Clone)]
 pub struct Volva {
     pub desc: Option<FreeText>,
 }
 
+
+#[derive(Clone)]
 pub struct Ring {
     /// (skirt-like, fragile, persistent, custom, etc.)
     pub desc: EntryEnumCustomNote,
 }
 
+
+#[derive(Clone)]
 pub struct SporeTint {
     pub tint: EntryTint,
     /// (on paper, glass, custom, etc.)

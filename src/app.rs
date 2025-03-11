@@ -1,9 +1,13 @@
+use find::Find;
 use leptos::task::spawn_local;
 use leptos::{ev::SubmitEvent, prelude::*};
+use pages::DisplayFindPage;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
+use std::default::Default;
 
 pub mod find;
+pub mod pages;
 
 
 #[wasm_bindgen]
@@ -42,9 +46,15 @@ pub fn App() -> impl IntoView {
         });
     };
 
+    let (find, _) = signal(Find::default());
+
     view! {
         <main class="container">
             <h1>"Welcome to Tauri + Leptos"</h1>
+
+            <DisplayFindPage
+                find=find
+            />
 
             <div class="row">
                 <a href="https://tauri.app" target="_blank">

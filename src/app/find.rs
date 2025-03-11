@@ -1,3 +1,4 @@
+use entry_types::entry_trait::Entry;
 use leptos::prelude::*;
 
 use infos::FindInfos;
@@ -16,8 +17,8 @@ pub mod notes;
 pub mod entry_types;
 
 
-
-
+#[derive(Default, Clone)]
+/// Find structure that contains all find datas
 pub struct Find {
     pub infos: FindInfos,
     pub morphology: Morphology,
@@ -25,6 +26,7 @@ pub struct Find {
     pub photos: Photos,
     pub notes: Notes,
 }
+impl Entry for Find {}
 
 
 

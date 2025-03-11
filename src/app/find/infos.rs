@@ -2,6 +2,10 @@ use leptos::prelude::*;
 
 use super::entry_types::{DateTime, FreeText, Location, EntryName};
 
+
+
+
+#[derive(Default, Clone)]
 pub struct FindInfos {
     pub id: FindId,
     pub source: FindSource,
@@ -13,12 +17,14 @@ pub struct FindInfos {
 
 
 /// Find Id struct
+#[derive(Default, Clone)]
 pub struct FindId {
     pub id: u32,
 }
 
 
 /// Source struct
+#[derive(Default, Clone)]
 pub struct FindSource {
     /// Owner Name
     pub owner_name: SourceName,
@@ -30,6 +36,7 @@ pub struct FindSource {
 
 /// How created this find and who found the specimen
 /// Depends on FindObservationType
+#[derive(Default, Clone)]
 pub struct SourceName {
     /// Name/Alias of the person that created this Find (and who found the specimen by default)
     owner_name: EntryName,
@@ -40,6 +47,7 @@ pub struct SourceName {
 
 
 /// Find Name struct
+#[derive(Default, Clone)]
 pub struct FindName {
     /// Given by the user (ex: "Russula #1" or "Weird mushroom by the old tree")
     pub find_name: EntryName,
@@ -51,15 +59,22 @@ pub struct FindName {
 
 
 /// Determines if the specimen was found by the user or present to them
+#[derive(Clone)]
 pub enum FindObservationType {
     FieldObservation,
     ExhibitedSpecimen,
+}
+impl Default for FindObservationType {
+    fn default() -> Self {
+        Self::FieldObservation
+    }
 }
 
 
 
 /// Find Name struct
 /// Depends on FindObservationType
+#[derive(Default, Clone)]
 pub struct FindDate {
     /// When was the specimen found
     pub found_date: Option<DateTime>,
@@ -71,6 +86,7 @@ pub struct FindDate {
 
 /// Determines where the find was found
 /// Depends on FindObservationType
+#[derive(Default, Clone)]
 pub struct FindLocation {
     /// Where the specimen was found
     /// (ex: "Vosges forest, Munster")
