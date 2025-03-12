@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 use infos::FindInfos;
-use magnifungi_shared_types::entry_types::entry_trait::Entry;
+use magnifungi_shared_types::entry_types::entry_trait::IntoFindView;
 use morphology::Morphology;
 use chemical_attributes::ChemicalAttributes;
 use notes::Notes;
@@ -25,162 +25,154 @@ pub struct Find {
     pub photos: Photos,
     pub notes: Notes,
 }
-impl Entry for Find {}
+impl IntoFindView for Find {
+    fn into_any_view(&self) -> AnyView {
+        vec![
+            self.infos.into_any_view(),
+            self.morphology.into_any_view(),
+            self.chemical_attributes.into_any_view(),
+            self.photos.into_any_view(),
+            self.notes.into_any_view(),
+        ].into_any()
+    }
+}
 
 
 
-
-/* Note: the person that created the "Find" will be referred as the finder
-and corresponds to the field "Find owner"
-
-
+/*
 --- Find Structure ---
 
-General Informations
+Find
+|-Category
+    |-Part
+        |-SubPart
+        |   |-Entry
+        |-Entry
 
-    Id: Locally unique id of the find
+
+--- Find Content ---
+
+General Information
+
+    Id: Locally unique ID of the find
 
     Source
         - Finder
-            - Find onwer: ? Name/Alias of the person that created this Find
-            - Specimen finder: ? Name/Alias of the person that found the
-                specimen if different from Find owner
-        - Creation date & time
-        - Last update date & time
+            - Find Owner: Name or alias of the person who created this find
+            - Specimen Finder: Name or alias of the person who found the specimen (if different from the find owner)
+        - Creation Date & Time
+        - Last Update Date & Time
 
     Name
-        - Find name: Given by the finder
-            (ex: "Russula #1" or "Weird mushroom by the old tree")
-        - Species name: ? Scientific name as identified by the finder
-        - Common name: ? Species common name as identified by the finder
+        - Find Name: Given by the finder (e.g., "Russula #1" or "Weird mushroom by the old tree")
+        - Species Name: Scientific name as identified by the finder
+        - Common Name: Species' common name as identified by the finder
     
     Observation Type
-        - Field observation
-            (if the specimen was just found on the field)
-        - Exhibited specimen
-            (if the specimen was brought somewhere by someone, like at an exhibition)
-
+        - Field Observation (specimen found in the wild)
+        - Exhibited Specimen (specimen brought to an event or exhibition)
+    
     Date
-        - Date & Time: Enum: Match -> Find Type
-            => Field observation:
-                - Date & time
-            => Exhibited specimen:
-                - Specimen date & time: when the specimen was collected
-                    - Date & time
-                - Exhibit date & time: when the specimen was observed by the Find owner
-                    - Date & time
+        - Match -> Find Type
+            => Field Observation:
+                - Date & Time
+            => Exhibited Specimen:
+                - Specimen Date & Time (when collected)
+                - Exhibit Date & Time (when observed by the find owner)
     
     Location
-        - Location: Enum: Match -> Find Type
-            => Field observation:
+        - Match -> Find Type
+            => Field Observation:
                 - Location:
-                    - Name: Given by the finder
-                    - GPS coordinates
-            => Exhibited specimen:
+                    - Name (given by the finder)
+                    - GPS Coordinates
+            => Exhibited Specimen:
                 - Specimen Location:
-                    - Name: Given by the finder
-                        (ex: "Vosges forest, Munster")
-                    - GPS coordinates
-                - Exhibition location:
-                    - Name: Given by the finder
-                        (ex: "Mycology Event", "Herbarium", "Mushroom Fair")
-                    - GPS coordinates
-        - Habitat description: Free text
-            (ex: "Mycology Event", "Herbarium", "Mushroom Fair")
-        - Host: ? some tree or plant if mycorrhizal associations or parasitic fungi
-    
+                    - Name (e.g., "Vosges forest, Munster")
+                    - GPS Coordinates
+                - Exhibition Location:
+                    - Name (e.g., "Mycology Event", "Herbarium", "Mushroom Fair")
+                    - GPS Coordinates
+        - Habitat Description: Free text
+        - Host: If associated with a tree or plant (e.g., mycorrhizal or parasitic fungi)
 
 Morphology
     
     Cap (Pileus)
-        - Shape: (ex: convex, flat, umbonate, bell-shaped, custom, etc.)
-            + note ?
+        - Shape: CapShapeEnum (Convex, Flat, Umbonate, Bell-shaped, Custom)
         - Tint:
-            - Tint description: free text
-            - Color: Color picker
-        - Surface: Enum (smooth, scaly, hairy, cracked, custom, etc.)
-            - note ?
+            - Description: Free text
+            - Color: Color Picker
+        - Surface: CapSurfaceEnum (Smooth, Scaly, Hairy, Cracked, Custom)
         - Dimensions:
             - Diameter: ?
             - Height: ?
             - Length: ?
             - Width: ?
     
-    SporeDispersasion
-        - Type:
-            - Enum (gilled, pored, toothed, ridged, custom, none)
-            - note ?
-        - Attachment: (free, attached, decurrent, custom, etc.)
-            - note ?
-        - Spacing: (dense, moderate, widely spaced, custom)
-            - note ?
+    Spore Dispersion
+        - Type: SporeDispersionTypeEnum (Gilled, Pored, Toothed, Ridged, None, Custom)
+        - Attachment: SporeAttachmentEnum (Free, Attached, Decurrent, Custom)
+        - Spacing: SporeSpacingEnum (Dense, Moderate, Widely Spaced, Custom)
         - Tint:
-            - Tint description: free text
-            - Color: Color picker
+            - Description: Free text
+            - Color: Color Picker
     
     Stem (Stipe)
-        - Dimension:
+        - Dimensions:
             - Diameter: ?
             - Height: ?
             - Length: ?
             - Width: ?
-        - Surface: Enum (smooth, fibrous, scaly, reticulated, custom, etc.)
-            - note ?
-        - Hollow/Solid: Enum (hollow, solid, chambered, custom)
-            - note?
+        - Surface: StemSurfaceEnum (Smooth, Fibrous, Scaly, Reticulated, Custom)
+        - Hollow/Solid: StemHollowEnum (Hollow, Solid, Chambered, Custom)
         - Tint:
-            - Tint description: free text
-            - Color: Color picker
+            - Description: Free text
+            - Color: Color Picker
     
-    Volva & Ring ?
-        - Description: free text
-        - Ring (Annulus): ? Enum (skirt-like, fragile, persistent, custom, etc.)
-            - note ?
+    Volva & Ring
+        - Description: Free text
+        - Ring: RingTypeEnum (Skirt-Like, Fragile, Persistent, Custom)
     
-    Spore Print ?
+    Spore Print
         - Tint:
-            - Tint description: free text
-            - Color: Color picker
-        - Print Method: ? Enum (on paper, glass, custom, etc.)
-            - note ?
-
-
+            - Description: Free text
+            - Color: Color Picker
+        - Print Method: PrintMethodEnum (On Paper, Glass, Custom)
+    
 Chemical Attributes
 
-    Edible: ? Enum (edible, not edible, poisonous, medicinal, unknown)
-
-    Odor: ? Enum (mild, fruity, anise-like, pungent, custom, etc.)
-        - note ?
+    Edibility: EdibilityEnum (Edible, Not Edible, Poisonous, Medicinal, Unknown)
     
-    Taste: ? Enum (mild, bitter, acrid, custom, etc.)
-        - note ?
-
-    Latex: ?
+    Odor: OdorEnum (Mild, Fruity, Anise-Like, Pungent, Custom)
+        
+    Taste: TasteEnum (Mild, Bitter, Acrid, Custom)
+    
+    Latex
         - Tint:
-            - Tint description: free text
-            - Color: Color picker
-        - note ? (reaction with air or else)
+            - Description: Free text
+            - Color: Color Picker
+        - Note: Reaction with air or other substances
     
-    Bruising Reaction ?
-        - Tint description: free text
-        - Tint before / after:
-            - Tint before:
-                - Tint description: free text
-                - Color: Color picker
-            - Tint after:
-                - Tint description: free text
-                - Color: Color picker
+    Bruising Reaction
+        - Description: Free text
+        - Tint Before / After:
+            - Before:
+                - Description: Free text
+                - Color: Color Picker
+            - After:
+                - Description: Free text
+                - Color: Color Picker
     
-    Chemical Reactions ?
-        - List of reactions
-            - Reaction: Enum (KOH, ammonia, FeSO₄ reactions, custom, etc.)
-                - note ?
-
+    Chemical Reactions
+        - List of Reactions:
+            - Reaction Type: ChemicalReactionEnum (KOH, Ammonia, FeSO₄, Custom)
 
 Photos
-    - List of photos ?
+    - List of Photos
 
 Notes
-    - Enum (Text note, Audio note, Drawing note)
-        
+    - Enum (Text Note, Audio Note, Drawing Note)
+
 */
+

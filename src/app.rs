@@ -10,6 +10,7 @@ pub mod find;
 pub mod pages;
 
 
+
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = ["window", "__TAURI__", "core"])]

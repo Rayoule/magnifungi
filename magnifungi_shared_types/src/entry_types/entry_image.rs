@@ -1,9 +1,9 @@
-use super::Entry;
+use super::IntoFindView;
 
 
 #[derive(Clone)]
 pub struct EntryImage {
     // Todo
 }
-impl Entry for EntryImage {}
+impl IntoFindView for EntryImage {}
 

@@ -1,143 +1,100 @@
-use serde::{Deserialize, Serialize};
+use leptos::prelude::{IntoAny, *};
+use magnifungi_macros::generate_enums_from_path;
 use strum::IntoEnumIterator;
 
-use super::{entry_trait::Entry, FreeText};
+use super::{entry_trait::IntoFindView, FreeText};
 
 
+// Generate all IntoEntryEnum enums from enums.json
+use strum_macros::EnumIter;
+generate_enums_from_path!();
 
-pub mod entry_enum_list;
-
-/// An EntryEnum that has:
-/// - Custom option
-/// - Note
-#[derive(Clone, Default)]
-pub struct EntryEnumCustomNote<T: IntoEntryEnumerator> {
-    variant: T,
-    custom: String,
-    note: FreeText,
-}
-impl<T: IntoEntryEnumerator> Entry for EntryEnumCustomNote<T> {}
-impl<T: IntoEntryEnumerator> HasEntryEnumerator<T> for EntryEnumCustomNote<T> {
-    // Needed
-    fn get_value(&self) -> &T { &self.variant }
-    fn set_value(&mut self, value: T) { self.variant = value; }
-
-    // Custom option
-    fn has_custom_option() -> bool { true }
-    fn get_custom(&self) -> Option<&str> { Some(self.custom.as_str()) }
-    fn set_custom(&mut self, input: &str) { self.custom = input.to_string() }
-
-    // Note
-    fn has_note() -> bool { true }
-    fn get_note(&self) -> Option<&FreeText> { Some(&self.note) }
-    fn set_note(&mut self, input: &str) { self.note = FreeText {content: input.to_string()} }
-}
-
-
-/// An EntryEnum that also has
-/// - Note
-#[derive(Clone, Default)]
-pub struct EntryEnumNote<T: IntoEntryEnumerator> {
-    variant: T,
-    note: FreeText,
-}
-impl<T: IntoEntryEnumerator> Entry for EntryEnumNote<T> {}
-impl<T: IntoEntryEnumerator> HasEntryEnumerator<T> for EntryEnumNote<T> {
-    // Needed
-    fn get_value(&self) -> &T { &self.variant }
-    fn set_value(&mut self, value: T) { self.variant = value; }
-
-    // Note
-    fn has_note() -> bool { true }
-    fn get_note(&self) -> Option<&FreeText> { Some(&self.note) }
-    fn set_note(&mut self, input: &str) { self.note = FreeText {content: input.to_string()} }
-}
-
-
-/// An EntryEnum that has
-/// - Custom option
-#[derive(Clone, Default)]
-pub struct EntryEnumCustom<T: IntoEntryEnumerator> {
-    variant: T,
-    custom: String,
-}
-impl<T: IntoEntryEnumerator> Entry for EntryEnumCustom<T> {}
-impl<T: IntoEntryEnumerator> HasEntryEnumerator<T> for EntryEnumCustom<T> {
-    // Needed
-    fn get_value(&self) -> &T { &self.variant }
-    fn set_value(&mut self, value: T) { self.variant = value; }
-
-    // Custom option
-    fn has_custom_option() -> bool { true }
-    fn get_custom(&self) -> Option<&str> { Some(self.custom.as_str()) }
-    fn set_custom(&mut self, input: &str) { self.custom = input.to_string() }
-}
-
-
-/// An EntryEnum
-#[derive(Clone, Default)]
-pub struct EntryEnum<T: IntoEntryEnumerator> {
-    variant: T,
-}
-impl<T: IntoEntryEnumerator> Entry for EntryEnum<T> {}
-impl<T: IntoEntryEnumerator> HasEntryEnumerator<T> for EntryEnum<T> {
-    fn get_value(&self) -> &T { &self.variant }
-    fn set_value(&mut self, value: T) { self.variant = value; }
-}
-
-
-/// Describes an enum for a Find entry field
-pub trait HasEntryEnumerator<T: IntoEntryEnumerator> {
-
-    // Needed !
-    fn get_value(&self) -> &T;
-    fn set_value(&mut self, value: T);
-
-    // Must fill if custom option !
-    fn has_custom_option() -> bool { false }
-    fn get_custom(&self) -> Option<&str> { None }
-    fn set_custom(&mut self, _input: &str) {}
-
-    // Must fill if has note !
-    fn has_note() -> bool { false }
-    fn get_note(&self) -> Option<&FreeText> { None }
-    fn set_note(&mut self, _input: &str) {}
-
-    // Don't override
-    fn read_as_str<'a>(&'a self) -> &'a str where T: 'a {
-        if self.get_value().is_custom() {
-            if let Some(s) = self.get_custom() {
-                s
-            } else { self.get_value().to_str() }
-        } else { self.get_value().to_str() }
-    }
-    fn get_all_variants(&self) -> Vec<String> {
-        let iterator = T::iter();
-        if Self::has_custom_option() {
-            iterator
-                .filter(|e: &T| !e.is_custom())
-                .map(|e: T| e.to_str().to_string())
-                .collect::<Vec<String>>()
-        } else {
-            iterator
-                .map(|e: T| e.to_str().to_string())
-                .collect::<Vec<String>>()
-        }
-    }
-}
 
 
 /// Describes an enum that can be used as an EntryEnumerator
 /// Every Enums used for entries must implement this !
-pub trait IntoEntryEnumerator: IntoEnumIterator {
+pub trait IntoEntryEnum: Send + Sync + IntoEnumIterator {
     fn to_str(&self) -> &str;
-    fn is_custom(&self) -> bool { false }
+    fn name_str(&self) -> &str;
+    fn has_custom_variant() -> bool;
+    fn get_custom_value(&self) -> Option<&str>;
+    fn try_set_custom(&mut self, new_value: &str) -> bool;
+    fn set_custom(&mut self, new_value: &str) -> bool;
+    fn custom_variant(value: &str) -> Option<Self>;
 }
 
-/// Struct for Json Enums
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct JsonEnum {
-    pub name: String,
-    pub variants: Vec<String>,
+
+/// EntryEnum struct
+/// - Note
+#[derive(Clone, Default)]
+pub struct EntryEnum<T: IntoEntryEnum> {
+    pub variant: T,
+    pub note: Option<FreeText>,
+}
+impl<T: IntoEntryEnum> EntryEnum<T> {
+    // Custom option
+    fn get_custom(&self) -> Option<&str> { self.variant.get_custom_value() }
+}
+impl<T: IntoEntryEnum> IntoFindView for EntryEnum<T> {
+    fn into_any_view(&self) -> AnyView {
+        todo!()
+    }
+
+    /*fn into_any_view(&self) -> AnyView {
+        view! {
+            <div>
+
+                // Name
+                <EntryEnumNameDisplay
+                    enum_name=self.variant.name_str().to_string()
+                />
+
+                // Value
+                <EntryEnumValueDisplay
+                    variant_value=self.variant.name_str().to_string()
+                    custom_value=self.get_custom().map(|s| s.to_string())
+                />
+
+                // Note
+                {move || {
+                    if let Some(note) = self.note {
+                        view! {
+                            <EntryEnumNoteDisplay
+                                enum_note=note
+                            />
+                        }.into_any()
+                    } else { ().into_any() }
+                }}        
+            </div>
+        }.into_any()
+    }*/
 }
 
+
+
+
+// Display Components
+
+/// Display Value
+#[component]
+pub fn EntryEnumValueDisplay(variant_value: String) -> impl IntoView {
+    view! {
+        <p> { variant_value }</p>
+    }
+}
+
+/// Display Name
+#[component]
+pub fn EntryEnumNameDisplay(enum_name: String) -> impl IntoView {
+    view! {
+        <p>{ enum_name.clone() }</p>
+    }
+}
+
+/// Display Name
+#[component]
+pub fn EntryEnumNoteDisplay(enum_note: FreeText) -> impl IntoView {
+    view! {
+        {move || enum_note.into_any_view() }
+    }
+}

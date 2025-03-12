@@ -1,4 +1,4 @@
-use entry_trait::Entry;
+use entry_trait::IntoFindView;
 
 
 pub mod entry_enum;
@@ -16,7 +16,7 @@ pub mod entry_trait;
 pub struct EntryName {
     pub name: String,
 }
-impl Entry for EntryName {}
+impl IntoFindView for EntryName {}
 
 
 #[derive(Default, Clone)]
@@ -28,14 +28,14 @@ impl FreeText {
         FreeText { content: note_content.to_string() }
     }
 }
-impl Entry for FreeText {}
+impl IntoFindView for FreeText {}
 
 
 #[derive(Default, Clone)]
 pub struct DateTime {
     pub id: u32
 }
-impl Entry for DateTime {}
+impl IntoFindView for DateTime {}
 
 
 #[derive(Default, Clone)]
@@ -43,11 +43,11 @@ pub struct Location {
     pub name: Option<String>,
     pub gps_coords: Option<GpsCoordinates>,
 }
-impl Entry for Location {}
+impl IntoFindView for Location {}
 
 
 #[derive(Default, Clone)]
 pub struct GpsCoordinates {
     // To do
 }
-impl Entry for GpsCoordinates {}
+impl IntoFindView for GpsCoordinates {}

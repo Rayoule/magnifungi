@@ -1,4 +1,4 @@
-use super::{Entry, EntryName, FreeText};
+use super::{IntoFindView, EntryName, FreeText};
 
 
 
@@ -13,7 +13,7 @@ impl Default for EntryNote {
         Self::TextNote(TextNote::default())
     }
 }
-impl Entry for EntryNote {}
+impl IntoFindView for EntryNote {}
 
 
 
@@ -22,19 +22,19 @@ pub struct TextNote {
     pub title: Option<EntryName>,
     pub content: FreeText,
 }
-impl Entry for TextNote {}
+impl IntoFindView for TextNote {}
 
 
 #[derive(Default, Clone)]
 pub struct AudioNote {
     //
 }
-impl Entry for AudioNote {}
+impl IntoFindView for AudioNote {}
 
 
 #[derive(Default, Clone)]
 pub struct DrawingNote {
     //
 }
-impl Entry for DrawingNote {}
+impl IntoFindView for DrawingNote {}
 

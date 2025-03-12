@@ -1,4 +1,4 @@
-use super::{Entry, FreeText};
+use super::{IntoFindView, FreeText};
 
 
 
@@ -7,12 +7,12 @@ pub struct EntryTint {
     pub tint_desc: Option<FreeText>,
     pub color: Option<ColorPicker>,
 }
-impl Entry for EntryTint {}
+impl IntoFindView for EntryTint {}
 
 
 #[derive(Clone)]
 pub struct ColorPicker {
     pub color: String,
 }
-impl Entry for ColorPicker {}
+impl IntoFindView for ColorPicker {}
 

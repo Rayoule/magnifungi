@@ -1,5 +1,7 @@
 use leptos::prelude::*;
-use magnifungi_shared_types::entry_types::{entry_value_unit::EntryValueUnit, FreeText};
+use magnifungi_shared_types::entry_types::{
+    entry_enum::*, entry_tint::EntryTint, entry_trait::IntoFindView, entry_value_unit::EntryValueUnit, FreeText
+};
 
 
 
@@ -19,19 +21,18 @@ pub struct Morphology {
     /// Specimen Spore Print
     pub spore_print: Option<SporeTint>,
 }
+impl IntoFindView for Morphology {}
 
 
 /// Describes the specimen's Cap (Pileus)
 #[derive(Clone)]
 pub struct Cap {
-    /*
     /// (convex, flat, umbonate, bell-shaped, custom, etc.)
-    pub shape: EntryEnumCustomNote<CapShapeEnum>,
+    pub shape: EntryEnum<CapShapeEnum>,
     pub tint: EntryTint,
     /// (smooth, scaly, hairy, cracked, custom, etc.)
-    pub surface: EntryEnumCustomNote<CapSurfaceEnum>,
+    pub surface: EntryEnum<CapSurfaceEnum>,
     pub dimension: Dimensions,
-    */
 }
 
 
@@ -48,29 +49,25 @@ pub struct Dimensions {
 /// Describes the specimen's Spore Dispersion
 #[derive(Clone)]
 pub struct SporeDispersion {
-    /*
     /// (gilled, pored, toothed, ridged, custom, none)
-    pub disp_type: EntryEnumCustomNote<DispersionEnum>,
+    pub disp_type: EntryEnum<SporeDispersionTypeEnum>,
     /// (free, attached, decurrent, custom, etc.)
-    pub attachment: EntryEnumCustomNote<AttachmentEnum>,
+    pub attachment: EntryEnum<SporeAttachmentEnum>,
     /// (dense, moderate, widely spaced, custom)
-    pub spacing: EntryEnumCustomNote<SpacingEnum>,
+    pub spacing: EntryEnum<SporeSpacingEnum>,
     pub tint: EntryTint
-    */
 }
 
 
 /// Describes the specimen's stem (stipe)
 #[derive(Clone)]
 pub struct Stem {
-    /*
     pub dimensions: Dimensions,
     /// (smooth, fibrous, scaly, reticulated, custom, etc.)
-    pub surface: EntryEnumCustomNote<StemSurfaceEnum>,
+    pub surface: EntryEnum<StemSurfaceEnum>,
     /// (hollow, solid, chambered, custom)
-    pub hollow_solid: EntryEnumCustomNote<HollowSolidEnum>,
+    pub hollow_solid: EntryEnum<StemHollowEnum>,
     pub tint: EntryTint,
-    */
 }
 
 
@@ -82,19 +79,15 @@ pub struct Volva {
 
 #[derive(Clone)]
 pub struct Ring {
-    /*
     /// (skirt-like, fragile, persistent, custom, etc.)
-    pub desc: EntryEnumCustomNote<RingEnum>,
-    */
+    pub desc: EntryEnum<RingTypeEnum>,
 }
 
 
 #[derive(Clone)]
 pub struct SporeTint {
-    /*
     pub tint: EntryTint,
     /// (on paper, glass, custom, etc.)
-    pub print_method: EntryEnumCustomNote<PrintMethodEnum>,
-    */
+    pub print_method: EntryEnum<PrintMethodEnum>,
 }
 

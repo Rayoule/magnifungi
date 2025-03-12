@@ -19,4 +19,4 @@ magnifungi_macros = { path = "./magnifungi_macros" }
 
 
 [workspace]
-members = ["magnifungi_macros", "magnifungi_shared_types", "magnifungi_tests", "src-tauri"]
+members = ["magnifungi_macros", "magnifungi_shared_types", "src-tauri"]

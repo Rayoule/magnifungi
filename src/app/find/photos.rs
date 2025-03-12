@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use magnifungi_shared_types::entry_types::entry_image::EntryImage;
+use magnifungi_shared_types::entry_types::{entry_image::EntryImage, entry_trait::IntoFindView};
 
 
 
@@ -9,3 +9,4 @@ use magnifungi_shared_types::entry_types::entry_image::EntryImage;
 pub struct Photos {
     pub photos: Vec<EntryImage>,
 }
+impl IntoFindView for Photos {}

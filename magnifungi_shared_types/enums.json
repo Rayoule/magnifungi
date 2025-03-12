@@ -1,4 +1,126 @@
-{
-    "name":"Edible",
-    "variants":["Yes","No","Maybe"]
-}
+[
+    {
+        "name": "CapShapeEnum",
+        "custom": true,
+        "variants": [
+            "Convex",
+            "Flat",
+            "Umbonate",
+            "Bell-shaped"
+        ]
+    },
+    {
+        "name": "CapSurfaceEnum",
+        "custom": true,
+        "variants": [
+            "Smooth",
+            "Scaly",
+            "Hairy",
+            "Cracked"
+        ]
+    },
+    {
+        "name": "SporeDispersionTypeEnum",
+        "custom": true,
+        "variants": [
+            "Gilled",
+            "Pored",
+            "Toothed",
+            "Ridged",
+            "None"
+        ]
+    },
+    {
+        "name": "SporeAttachmentEnum",
+        "custom": true,
+        "variants": [
+            "Free",
+            "Attached",
+            "Decurrent"
+        ]
+    },
+    {
+        "name": "SporeSpacingEnum",
+        "custom": true,
+        "variants": [
+            "Dense",
+            "Moderate",
+            "Widely Spaced"
+        ]
+    },
+    {
+        "name": "StemSurfaceEnum",
+        "custom": true,
+        "variants": [
+            "Smooth",
+            "Fibrous",
+            "Scaly",
+            "Reticulated"
+        ]
+    },
+    {
+        "name": "StemHollowEnum",
+        "custom": true,
+        "variants": [
+            "Hollow",
+            "Solid",
+            "Chambered"
+        ]
+    },
+    {
+        "name": "RingTypeEnum",
+        "custom": true,
+        "variants": [
+            "Skirt-Like",
+            "Fragile",
+            "Persistent"
+        ]
+    },
+    {
+        "name": "PrintMethodEnum",
+        "custom": true,
+        "variants": [
+            "On Paper",
+            "Glass"
+        ]
+    },
+    {
+        "name": "EdibilityEnum",
+        "custom": false,
+        "variants": [
+            "Edible",
+            "Not Edible",
+            "Poisonous",
+            "Medicinal",
+            "Unknown"
+        ]
+    },
+    {
+        "name": "OdorEnum",
+        "custom": true,
+        "variants": [
+            "Mild",
+            "Fruity",
+            "Anise-Like",
+            "Pungent"
+        ]
+    },
+    {
+        "name": "TasteEnum",
+        "custom": true,
+        "variants": [
+            "Mild",
+            "Bitter",
+            "Acrid"
+        ]
+    },
+    {
+        "name": "ChemicalReactionEnum",
+        "custom": true,
+        "variants": [
+            "KOH",
+            "Ammonia",
+            "FeSO4"
+        ]
+    }
+]

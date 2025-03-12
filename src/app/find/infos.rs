@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use magnifungi_shared_types::entry_types::{
-    DateTime, EntryName, FreeText, Location
+    entry_trait::IntoFindView, DateTime, EntryName, FreeText, Location
 };
 
 
@@ -13,6 +13,7 @@ pub struct FindInfos {
     pub date: FindDate,
     pub location: FindLocation
 }
+impl IntoFindView for FindInfos {}
 
 
 /// Find Id struct
@@ -20,6 +21,7 @@ pub struct FindInfos {
 pub struct FindId {
     pub id: u32,
 }
+impl IntoFindView for FindId {}
 
 
 /// Source struct
@@ -32,6 +34,7 @@ pub struct FindSource {
     /// Last update date & time
     pub last_updated: DateTime,
 }
+impl IntoFindView for FindSource {}
 
 /// How created this find and who found the specimen
 /// Depends on FindObservationType
@@ -42,6 +45,7 @@ pub struct SourceName {
     /// Name/Alias of the person that found the specimen if different from Find owner
     finder_name: Option<EntryName>,
 }
+impl IntoFindView for SourceName {}
 
 
 
@@ -55,6 +59,7 @@ pub struct FindName {
     /// Common name as identified by the user
     pub common_name: EntryName,
 }
+impl IntoFindView for FindName {}
 
 
 /// Determines if the specimen was found by the user or present to them
@@ -68,6 +73,7 @@ impl Default for FindObservationType {
         Self::FieldObservation
     }
 }
+impl IntoFindView for FindObservationType {}
 
 
 
@@ -80,7 +86,7 @@ pub struct FindDate {
     /// When was the specimen observed after being found
     pub observed_date: Option<DateTime>,
 }
-
+impl IntoFindView for FindDate {}
 
 
 /// Determines where the find was found
@@ -99,3 +105,4 @@ pub struct FindLocation {
     /// Was the specimen found on a host (for mycorrhizal associations or parasitic fungi)
     pub host: Option<FreeText>,
 }
+impl IntoFindView for FindLocation {}
