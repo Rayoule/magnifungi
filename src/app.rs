@@ -29,7 +29,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <main>
-            <h1>"Welcome to Magnifungi"</h1>
+            <div class="title" >"Welcome to Magnifungi"</div>
 
             <DisplayFindPage
                 find=find

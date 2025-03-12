@@ -1,30 +1,15 @@
+use find_types::FEntry;
 use leptos::prelude::*;
 use crate::view_trait::IntoFindView;
 
 
+pub mod find_types;
 pub mod entry_enum;
 pub mod entry_tint;
 pub mod entry_value_unit;
 pub mod entry_list;
 pub mod entry_image;
 pub mod entry_note;
-
-
-
-/// Find Entry
-#[derive(Default, Clone)]
-pub struct Entry<T: IntoFindView>(T);
-impl<T: IntoFindView> IntoFindView for Entry<T> {
-    fn into_any_view(&self) -> AnyView {
-        view! {
-            <div
-                class="find-entry"
-            >
-                { self.0.into_any_view() }
-            </div>
-        }.into_any()
-    }
-}
 
 
 
@@ -35,7 +20,7 @@ pub struct FindId {
 impl IntoFindView for FindId {
     fn into_any_view(&self) -> AnyView {
         view! {
-            <h5>{ self.id }</h5>
+            <span>{ self.id }</span>
         }.into_any()
     }
 }
@@ -81,8 +66,8 @@ impl IntoFindView for DateTime {
 
 #[derive(Default, Clone)]
 pub struct Location {
-    pub name: Option<Entry<EntryName>>,
-    pub gps_coords: Option<Entry<GpsCoordinates>>,
+    pub name: Option<FEntry<EntryName>>,
+    pub gps_coords: Option<FEntry<GpsCoordinates>>,
 }
 impl IntoFindView for Location {
     fn into_any_view(&self) -> AnyView {

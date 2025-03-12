@@ -1,10 +1,10 @@
 use leptos::prelude::*;
 use magnifungi_shared_types::{entry_types::{
-    entry_enum::*, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, Entry, FreeText
+    entry_enum::*, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, find_types::FEntry, FreeText
 }, view_trait::IntoFindView};
 
 use super::{
-    CapShapeEnum, CapSurfaceEnum, FindPart, PrintMethodEnum, RingTypeEnum,
+    CapShapeEnum, CapSurfaceEnum, FPart, PrintMethodEnum, RingTypeEnum,
     SporeAttachmentEnum, SporeDispersionTypeEnum, SporeSpacingEnum, StemHollowEnum,
     StemSurfaceEnum
 };
@@ -15,17 +15,17 @@ use super::{
 #[derive(Default, Clone)]
 pub struct Morphology {
     /// Specimen Cap (Pileus)
-    pub cap: Option<FindPart<Cap>>,
+    pub cap: Option<FPart<Cap>>,
     /// Specimen Gills or Pores or Teeth
-    pub gills_pores_teeth: Option<FindPart<SporeDispersion>>,
+    pub gills_pores_teeth: Option<FPart<SporeDispersion>>,
     /// Specimen Stem (Stipe)
-    pub stem: Option<FindPart<Stem>>,
+    pub stem: Option<FPart<Stem>>,
     /// Specimen Volva
-    pub volva: Option<FindPart<Volva>>,
+    pub volva: Option<FPart<Volva>>,
     /// Specimen Ring
-    pub ring: Option<FindPart<Ring>>,
+    pub ring: Option<FPart<Ring>>,
     /// Specimen Spore Print
-    pub spore_print: Option<FindPart<SporeTint>>,
+    pub spore_print: Option<FPart<SporeTint>>,
 }
 impl IntoFindView for Morphology {
     fn into_any_view(&self) -> AnyView {
@@ -57,11 +57,11 @@ impl IntoFindView for Morphology {
 #[derive(Clone)]
 pub struct Cap {
     /// (convex, flat, umbonate, bell-shaped, custom, etc.)
-    pub shape: Entry<EntryEnum<CapShapeEnum>>,
-    pub tint: Entry<EntryTint>,
+    pub shape: FEntry<EntryEnum<CapShapeEnum>>,
+    pub tint: FEntry<EntryTint>,
     /// (smooth, scaly, hairy, cracked, custom, etc.)
-    pub surface: Entry<EntryEnum<CapSurfaceEnum>>,
-    pub dimension: Entry<Dimensions>,
+    pub surface: FEntry<EntryEnum<CapSurfaceEnum>>,
+    pub dimension: FEntry<Dimensions>,
 }
 impl IntoFindView for Cap {
     fn into_any_view(&self) -> AnyView {
@@ -107,12 +107,12 @@ impl IntoFindView for Dimensions {
 #[derive(Clone)]
 pub struct SporeDispersion {
     /// (gilled, pored, toothed, ridged, custom, none)
-    pub disp_type: Entry<EntryEnum<SporeDispersionTypeEnum>>,
+    pub disp_type: FEntry<EntryEnum<SporeDispersionTypeEnum>>,
     /// (free, attached, decurrent, custom, etc.)
-    pub attachment: Entry<EntryEnum<SporeAttachmentEnum>>,
+    pub attachment: FEntry<EntryEnum<SporeAttachmentEnum>>,
     /// (dense, moderate, widely spaced, custom)
-    pub spacing: Entry<EntryEnum<SporeSpacingEnum>>,
-    pub tint: Entry<EntryTint>
+    pub spacing: FEntry<EntryEnum<SporeSpacingEnum>>,
+    pub tint: FEntry<EntryTint>
 }
 impl IntoFindView for SporeDispersion {
     fn into_any_view(&self) -> AnyView {
@@ -129,12 +129,12 @@ impl IntoFindView for SporeDispersion {
 /// Describes the specimen's stem (stipe)
 #[derive(Clone)]
 pub struct Stem {
-    pub dimensions: Entry<Dimensions>,
+    pub dimensions: FEntry<Dimensions>,
     /// (smooth, fibrous, scaly, reticulated, custom, etc.)
-    pub surface: Entry<EntryEnum<StemSurfaceEnum>>,
+    pub surface: FEntry<EntryEnum<StemSurfaceEnum>>,
     /// (hollow, solid, chambered, custom)
-    pub hollow_solid: Entry<EntryEnum<StemHollowEnum>>,
-    pub tint: Entry<EntryTint>,
+    pub hollow_solid: FEntry<EntryEnum<StemHollowEnum>>,
+    pub tint: FEntry<EntryTint>,
 }
 impl IntoFindView for Stem {
     fn into_any_view(&self) -> AnyView {
@@ -150,7 +150,7 @@ impl IntoFindView for Stem {
 
 #[derive(Clone)]
 pub struct Volva {
-    pub desc: Option<Entry<FreeText>>,
+    pub desc: Option<FEntry<FreeText>>,
 }
 impl IntoFindView for Volva {
     fn into_any_view(&self) -> AnyView {
@@ -168,7 +168,7 @@ impl IntoFindView for Volva {
 #[derive(Clone)]
 pub struct Ring {
     /// (skirt-like, fragile, persistent, custom, etc.)
-    pub desc: Entry<EntryEnum<RingTypeEnum>>,
+    pub desc: FEntry<EntryEnum<RingTypeEnum>>,
 }
 impl IntoFindView for Ring {
     fn into_any_view(&self) -> AnyView {
@@ -179,9 +179,9 @@ impl IntoFindView for Ring {
 
 #[derive(Clone)]
 pub struct SporeTint {
-    pub tint: Entry<EntryTint>,
+    pub tint: FEntry<EntryTint>,
     /// (on paper, glass, custom, etc.)
-    pub print_method: Entry<EntryEnum<PrintMethodEnum>>,
+    pub print_method: FEntry<EntryEnum<PrintMethodEnum>>,
 }
 impl IntoFindView for SporeTint {
     fn into_any_view(&self) -> AnyView {

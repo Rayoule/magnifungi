@@ -1,12 +1,12 @@
 use::leptos::prelude::*;
-use super::{Entry, FreeText, IntoFindView};
+use super::{find_types::FEntry, FreeText, IntoFindView};
 
 
 
 #[derive(Clone)]
 pub struct EntryTint {
-    pub tint_desc: Option<Entry<FreeText>>,
-    pub color: Option<Entry<ColorPicker>>,
+    pub tint_desc: Option<FEntry<FreeText>>,
+    pub color: Option<FEntry<ColorPicker>>,
 }
 impl IntoFindView for EntryTint {
     fn into_any_view(&self) -> AnyView {

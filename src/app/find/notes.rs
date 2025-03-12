@@ -1,5 +1,9 @@
 use leptos::prelude::*;
-use magnifungi_shared_types::{entry_types::{entry_list::EntryList, entry_note::EntryNote}, view_trait::IntoFindView};
+use magnifungi_shared_types::{
+    entry_types::{
+        entry_list::EntryList, entry_note::EntryNote
+    }, view_trait::IntoFindView
+};
 
 
 

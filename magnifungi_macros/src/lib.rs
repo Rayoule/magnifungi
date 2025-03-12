@@ -38,7 +38,7 @@ pub fn generate_enums_from_path(_: TokenStream) -> TokenStream {
         .for_each(|this_enum| {
 
             let enum_name = syn::Ident::new(
-                &clean_for_enum(&this_enum.name),
+                &clean_for_enum(&this_enum.name.replace("Name", "")),
                 proc_macro2::Span::call_site()
             );
 

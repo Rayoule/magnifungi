@@ -19,11 +19,11 @@ pub mod notes;
 /// Find structure that contains all find datas
 #[derive(Default, Clone)]
 pub struct Find {
-    pub infos: FindCategory<FindInfos>,
-    pub morphology: FindCategory<Morphology>,
-    pub chemical_attributes: FindCategory<ChemicalAttributes>,
-    pub photos: FindCategory<Photos>,
-    pub notes: FindCategory<Notes>,
+    pub infos: FCategory<FindInfos>,
+    pub morphology: FCategory<Morphology>,
+    pub chemical_attributes: FCategory<ChemicalAttributes>,
+    pub photos: FCategory<Photos>,
+    pub notes: FCategory<Notes>,
 }
 impl IntoFindView for Find {
     fn into_any_view(&self) -> AnyView {
@@ -34,54 +34,6 @@ impl IntoFindView for Find {
             self.photos.into_any_view(),
             self.notes.into_any_view(),
         ].into_any()
-    }
-}
-
-
-
-/// Find Categories
-#[derive(Default, Clone)]
-pub struct FindCategory<T: IntoFindView>(T);
-impl<T: IntoFindView> IntoFindView for FindCategory<T> {
-    fn into_any_view(&self) -> AnyView {
-        view! {
-            <div
-                class="find-category"
-            >
-                { self.0.into_any_view() }
-            </div>
-        }.into_any()
-    }
-}
-
-/// Find Parts
-#[derive(Default, Clone)]
-pub struct FindPart<T: IntoFindView>(T);
-impl<T: IntoFindView> IntoFindView for FindPart<T> {
-    fn into_any_view(&self) -> AnyView {
-        view! {
-            <div
-                class="find-part"
-            >
-                { self.0.into_any_view() }
-            </div>
-        }.into_any()
-    }
-}
-
-
-/// Find Entry
-#[derive(Default, Clone)]
-pub struct FindEntry<T: IntoFindView>(T);
-impl<T:IntoFindView> IntoFindView for FindEntry<T> {
-    fn into_any_view(&self) -> AnyView {
-        view! {
-            <div
-                class="find-entry"
-            >
-                { self.0.into_any_view() }
-            </div>
-        }.into_any()
     }
 }
 

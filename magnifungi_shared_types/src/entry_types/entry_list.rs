@@ -1,10 +1,10 @@
 use::leptos::prelude::*;
-use super::{Entry, IntoFindView};
+use super::{find_types::FEntry, IntoFindView};
 
 
 #[derive(Default, Clone)]
 pub struct EntryList<T: IntoFindView> {
-    pub entries: Vec<Entry<T>>,
+    pub entries: Vec<FEntry<T>>,
 }
 impl<T: IntoFindView> IntoFindView for EntryList<T> {
     fn into_any_view(&self) -> AnyView {

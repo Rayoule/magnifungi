@@ -1,3 +1,5 @@
+use std::default;
+
 use::leptos::prelude::*;
 use super::{IntoFindView, EntryName, FreeText};
 

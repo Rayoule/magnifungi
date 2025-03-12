@@ -9,6 +9,8 @@ use super::find::Find;
 pub fn DisplayFindPage(find: ReadSignal<Find>) -> impl IntoView {
 
     view! {
-        { move || find.get().into_any_view() }
+        <div class="find" >
+            { move || find.get().into_any_view() }
+        </div>
     }
 }
