@@ -1,6 +1,13 @@
-# Tauri + Leptos
+# Magnifungi
 
-This template should help get you started developing with Tauri and Leptos.
+Magnifungi is a mobile application that helps mycologists
+to store their finds and identifications when out on the field.
+
+
+# Tools
+
+This app is powered by Rust, Leptos and Tauri
+
 
 ## Recommended IDE Setup
 

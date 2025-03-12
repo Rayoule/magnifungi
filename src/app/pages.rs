@@ -1,6 +1,6 @@
 use leptos::prelude::*;
+use magnifungi_shared_types::view_trait::IntoFindView;
 
-use magnifungi_shared_types::entry_types::entry_trait::IntoFindView;
 use super::find::Find;
 
 

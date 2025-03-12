@@ -5,13 +5,12 @@ use serde::{Deserialize, Serialize};
 
 
 
+
 /// Helper function to clean litteral strings into fine CamelCase Strings for enums
 fn clean_for_enum(name: &str) -> String {
     use convert_case::Case;
     name.to_case(Case::Pascal)
 }
-
-
 
 /// Macro to generate all enum types from /magnifungi_shared_types/enums.json
 #[proc_macro]

@@ -1,3 +1,4 @@
+use::leptos::prelude::*;
 use super::{IntoFindView, EntryName, FreeText};
 
 
@@ -13,7 +14,15 @@ impl Default for EntryNote {
         Self::TextNote(TextNote::default())
     }
 }
-impl IntoFindView for EntryNote {}
+impl IntoFindView for EntryNote {
+    fn into_any_view(&self) -> AnyView {
+        match self {
+            EntryNote::TextNote(n) => n.into_any_view(),
+            EntryNote::AudioNote(n) => n.into_any_view(),
+            EntryNote::DrawingNote(n) => n.into_any_view(),
+        }
+    }
+}
 
 
 
@@ -22,19 +31,47 @@ pub struct TextNote {
     pub title: Option<EntryName>,
     pub content: FreeText,
 }
-impl IntoFindView for TextNote {}
+impl IntoFindView for TextNote {
+    fn into_any_view(&self) -> AnyView {
+        let title = self
+            .title
+            .clone()
+            .map_or(
+                ().into_any(),
+                |n| n.into_any_view()
+            );
+            let content = self
+                .content
+                .clone()
+                .into_any_view();
+        view! {
+            <div>
+                {title}
+                {content}
+            </div>
+        }.into_any()
+    }
+}
 
 
 #[derive(Default, Clone)]
 pub struct AudioNote {
     //
 }
-impl IntoFindView for AudioNote {}
+impl IntoFindView for AudioNote {
+    fn into_any_view(&self) -> AnyView {
+        ().into_any()
+    }
+}
 
 
 #[derive(Default, Clone)]
 pub struct DrawingNote {
     //
 }
-impl IntoFindView for DrawingNote {}
+impl IntoFindView for DrawingNote {
+    fn into_any_view(&self) -> AnyView {
+        ().into_any()
+    }
+}
 

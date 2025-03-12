@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 use infos::FindInfos;
-use magnifungi_shared_types::entry_types::entry_trait::IntoFindView;
+use magnifungi_shared_types::view_trait::IntoFindView;
 use morphology::Morphology;
 use chemical_attributes::ChemicalAttributes;
 use notes::Notes;
@@ -16,14 +16,14 @@ pub mod photos;
 pub mod notes;
 
 
-#[derive(Default, Clone)]
 /// Find structure that contains all find datas
+#[derive(Default, Clone)]
 pub struct Find {
-    pub infos: FindInfos,
-    pub morphology: Morphology,
-    pub chemical_attributes: ChemicalAttributes,
-    pub photos: Photos,
-    pub notes: Notes,
+    pub infos: FindCategory<FindInfos>,
+    pub morphology: FindCategory<Morphology>,
+    pub chemical_attributes: FindCategory<ChemicalAttributes>,
+    pub photos: FindCategory<Photos>,
+    pub notes: FindCategory<Notes>,
 }
 impl IntoFindView for Find {
     fn into_any_view(&self) -> AnyView {
@@ -36,6 +36,61 @@ impl IntoFindView for Find {
         ].into_any()
     }
 }
+
+
+
+/// Find Categories
+#[derive(Default, Clone)]
+pub struct FindCategory<T: IntoFindView>(T);
+impl<T: IntoFindView> IntoFindView for FindCategory<T> {
+    fn into_any_view(&self) -> AnyView {
+        view! {
+            <div
+                class="find-category"
+            >
+                { self.0.into_any_view() }
+            </div>
+        }.into_any()
+    }
+}
+
+/// Find Parts
+#[derive(Default, Clone)]
+pub struct FindPart<T: IntoFindView>(T);
+impl<T: IntoFindView> IntoFindView for FindPart<T> {
+    fn into_any_view(&self) -> AnyView {
+        view! {
+            <div
+                class="find-part"
+            >
+                { self.0.into_any_view() }
+            </div>
+        }.into_any()
+    }
+}
+
+
+/// Find Entry
+#[derive(Default, Clone)]
+pub struct FindEntry<T: IntoFindView>(T);
+impl<T:IntoFindView> IntoFindView for FindEntry<T> {
+    fn into_any_view(&self) -> AnyView {
+        view! {
+            <div
+                class="find-entry"
+            >
+                { self.0.into_any_view() }
+            </div>
+        }.into_any()
+    }
+}
+
+
+// Generate all IntoEntryEnum enums from enums.json
+use strum_macros::EnumIter;
+use magnifungi_shared_types::entry_types::entry_enum::IntoEntryEnum;
+use magnifungi_macros::generate_enums_from_path;
+generate_enums_from_path!();
 
 
 

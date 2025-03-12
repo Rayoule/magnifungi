@@ -1,13 +1,9 @@
 use leptos::prelude::{IntoAny, *};
-use magnifungi_macros::generate_enums_from_path;
 use strum::IntoEnumIterator;
 
-use super::{entry_trait::IntoFindView, FreeText};
+use crate::view_trait::IntoFindView;
 
-
-// Generate all IntoEntryEnum enums from enums.json
-use strum_macros::EnumIter;
-generate_enums_from_path!();
+use super::FreeText;
 
 
 
@@ -37,10 +33,7 @@ impl<T: IntoEntryEnum> EntryEnum<T> {
 }
 impl<T: IntoEntryEnum> IntoFindView for EntryEnum<T> {
     fn into_any_view(&self) -> AnyView {
-        todo!()
-    }
-
-    /*fn into_any_view(&self) -> AnyView {
+        let note = self.note.clone();
         view! {
             <div>
 
@@ -52,12 +45,11 @@ impl<T: IntoEntryEnum> IntoFindView for EntryEnum<T> {
                 // Value
                 <EntryEnumValueDisplay
                     variant_value=self.variant.name_str().to_string()
-                    custom_value=self.get_custom().map(|s| s.to_string())
                 />
 
                 // Note
                 {move || {
-                    if let Some(note) = self.note {
+                    if let Some(note) = note.clone() {
                         view! {
                             <EntryEnumNoteDisplay
                                 enum_note=note
@@ -67,7 +59,7 @@ impl<T: IntoEntryEnum> IntoFindView for EntryEnum<T> {
                 }}        
             </div>
         }.into_any()
-    }*/
+    }
 }
 
 
