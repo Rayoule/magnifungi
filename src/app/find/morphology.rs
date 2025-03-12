@@ -57,15 +57,20 @@ impl IntoFindView for Morphology {
 #[derive(Clone)]
 pub struct Cap {
     /// (convex, flat, umbonate, bell-shaped, custom, etc.)
-    pub shape: EntryEnum<CapShapeEnum>,
-    pub tint: EntryTint,
+    pub shape: Entry<EntryEnum<CapShapeEnum>>,
+    pub tint: Entry<EntryTint>,
     /// (smooth, scaly, hairy, cracked, custom, etc.)
-    pub surface: EntryEnum<CapSurfaceEnum>,
-    pub dimension: Dimensions,
+    pub surface: Entry<EntryEnum<CapSurfaceEnum>>,
+    pub dimension: Entry<Dimensions>,
 }
 impl IntoFindView for Cap {
     fn into_any_view(&self) -> AnyView {
-        todo!()
+        vec![
+            self.shape.into_any_view(),
+            self.tint.into_any_view(),
+            self.surface.into_any_view(),
+            self.dimension.into_any_view(),
+        ].into_any()
     }
 }
 
@@ -133,7 +138,12 @@ pub struct Stem {
 }
 impl IntoFindView for Stem {
     fn into_any_view(&self) -> AnyView {
-        todo!()
+        vec![
+            self.dimensions.into_any_view(),
+            self.surface.into_any_view(),
+            self.hollow_solid.into_any_view(),
+            self.tint.into_any_view(),
+        ].into_any()
     }
 }
 
@@ -144,7 +154,13 @@ pub struct Volva {
 }
 impl IntoFindView for Volva {
     fn into_any_view(&self) -> AnyView {
-        todo!()
+        self
+            .desc
+            .as_ref()
+            .map(|e| {
+                e.into_any_view()
+            })
+            .into_any()
     }
 }
 
