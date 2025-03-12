@@ -2,3 +2,4 @@
 /target/
 /Cargo.lock
 **/keystore.properties
+old_styles.css
