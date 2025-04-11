@@ -1,12 +1,14 @@
 # Magnifungi
 
-Magnifungi is a mobile application that helps mycologists
-to store their finds and identifications when out on the field.
+Magnifungi is a simple mobile application that helps mycologists to
+locally store identifications of specimens they encountered.
+
+An import-export feature allows to backup or exchange specimen identifications between devices.
 
 
 # Tools
 
-This app is powered by Rust, Leptos and Tauri
+This app is powered by [Rust](https://www.rust-lang.org/), [Tauri](https://www.rust-lang.org/) and [Leptos](https://www.rust-lang.org/).
 
 
 ## Recommended IDE Setup
