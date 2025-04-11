@@ -71,7 +71,7 @@ impl<T: IntoEntryEnum> IntoFindView for EntryEnum<T> {
 #[component]
 pub fn EntryEnumValueDisplay(variant_value: String) -> impl IntoView {
     view! {
-        <p> { variant_value }</p>
+        <p class="entry-enum value" > { variant_value }</p>
     }
 }
 
@@ -79,7 +79,7 @@ pub fn EntryEnumValueDisplay(variant_value: String) -> impl IntoView {
 #[component]
 pub fn EntryEnumNameDisplay(enum_name: String) -> impl IntoView {
     view! {
-        <p>{ enum_name.clone() }</p>
+        <p class="entry-enum name" >{ enum_name }</p>
     }
 }
 
@@ -87,6 +87,8 @@ pub fn EntryEnumNameDisplay(enum_name: String) -> impl IntoView {
 #[component]
 pub fn EntryEnumNoteDisplay(enum_note: FreeText) -> impl IntoView {
     view! {
-        {move || enum_note.into_any_view() }
+        <div class="entry-enum note" >
+            {move || enum_note.into_any_view() }
+        </div>
     }
 }

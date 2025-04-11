@@ -8,8 +8,9 @@ pub struct EntryImage {
 }
 impl IntoFindView for EntryImage {
     fn into_any_view(&self) -> leptos::prelude::AnyView {
+        // TODO avoid cloning the image
         view! {
-            <p>{self.img.clone()}</p>
+            <p>{  self.img.clone() }</p>
         }.into_any()
     }
 }

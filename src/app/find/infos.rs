@@ -3,8 +3,6 @@ use magnifungi_shared_types::{entry_types::{
     find_types::{FEntry, FPart}, DateTime, EntryName, FindId, FreeText, Location
 }, view_trait::IntoFindView};
 
-use super::*;
-
 
 #[derive(Default, Clone)]
 pub struct FindInfos {
