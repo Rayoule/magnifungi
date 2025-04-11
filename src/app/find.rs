@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 use infos::FindInfos;
-use magnifungi_shared_types::view_trait::IntoFindView;
+use magnifungi_shared_types::{entry_types::find_types::FCategory, view_trait::IntoFindView};
 use morphology::Morphology;
 use chemical_attributes::ChemicalAttributes;
 use notes::Notes;

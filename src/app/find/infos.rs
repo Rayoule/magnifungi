@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use magnifungi_shared_types::{entry_types::{
-    DateTime, find_types::FEntry, EntryName, FindId, FreeText, Location
+    find_types::{FEntry, FPart}, DateTime, EntryName, FindId, FreeText, Location
 }, view_trait::IntoFindView};
 
 use super::*;

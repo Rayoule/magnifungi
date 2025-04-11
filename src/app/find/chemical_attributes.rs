@@ -1,8 +1,8 @@
 use leptos::prelude::*;
 use magnifungi_shared_types::{entry_types::{
-    entry_enum::*, entry_list::EntryList, entry_tint::EntryTint, find_types::FEntry, FreeText}, view_trait::IntoFindView};
+    entry_enum::*, entry_list::EntryList, entry_tint::EntryTint, find_types::{FEntry, FPart}, FreeText}, view_trait::IntoFindView};
 
-use super::{ChemicalReactionEnum, EdibilityEnum, FPart, OdorEnum, TasteEnum};
+use super::{ChemicalReactionEnum, EdibilityEnum, OdorEnum, TasteEnum};
 
 
 

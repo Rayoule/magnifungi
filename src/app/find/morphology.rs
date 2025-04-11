@@ -1,10 +1,10 @@
 use leptos::prelude::*;
 use magnifungi_shared_types::{entry_types::{
-    entry_enum::*, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, find_types::FEntry, FreeText
+    entry_enum::*, entry_tint::EntryTint, entry_value_unit::EntryValueUnit, find_types::{FEntry, FPart}, FreeText
 }, view_trait::IntoFindView};
 
 use super::{
-    CapShapeEnum, CapSurfaceEnum, FPart, PrintMethodEnum, RingTypeEnum,
+    CapShapeEnum, CapSurfaceEnum, PrintMethodEnum, RingTypeEnum,
     SporeAttachmentEnum, SporeDispersionTypeEnum, SporeSpacingEnum, StemHollowEnum,
     StemSurfaceEnum
 };
